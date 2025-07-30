@@ -16,11 +16,15 @@ PetMatcher is a React Native mobile application that lets users upload pictures 
 
 ---
 
-## Screenshots and Demo Video
+## App Preview
 
-<img src="./screenshots/img1.png" width="250" />  
-<img src="./screenshots/img2.png" width="250" />  
-<img src="./screenshots/app.gif" width="250" />
+<table>
+  <tr>
+    <td><img src="./screenshots/img1.png" width="250" /></td>
+    <td><img src="./screenshots/img2.png" width="250" /></td>
+    <td><img src="./screenshots/app.png" width="250" /></td>
+  </tr>
+</table>
 
 ---
 
