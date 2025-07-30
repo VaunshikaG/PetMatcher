@@ -1,4 +1,4 @@
-package com.petmatcher
+package com.redux.pet_matcher
 
 import android.app.Application
 import com.facebook.react.PackageList
