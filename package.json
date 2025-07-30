@@ -17,6 +17,7 @@
     "react": "19.1.0",
     "react-native": "0.80.2",
     "react-native-image-picker": "^8.2.1",
+    "react-native-rename": "^3.2.17",
     "react-native-snackbar": "^2.9.0",
     "react-native-vector-icons": "^10.3.0",
     "react-redux": "^9.2.0"
