@@ -215,7 +215,7 @@ const Home = () => {
       )}
       <ScrollView>
         <View style={styles.header}>
-          <Icons name='dog' iconStyle='solid' size={20} />
+          <Icons name='dog' iconStyle='solid' size={20} color={AppTheme.white1}/>
           <Text style={styles.title}>Find your perfect pet match!</Text>
         </View>
 
