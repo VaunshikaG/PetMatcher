@@ -1,5 +1,5 @@
 export const AppConstants = {
-    post_dog_data: "https://reqres.in/api/custom-endpoints",
+    post_dog_data: "https://reqres.in/api/users",
     fetch_dog_img: "https://dog.ceo/api/breeds/image/random",
 
     fieldRequired: "Please fill this field",
