@@ -21,10 +21,9 @@ import { AppTheme } from './utils/colors';
 import { AppConstants } from './utils/constants';
 import { DogReqData } from './models/dogModel';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from './features/store';
-import { getRandomDogImgThunk, postDogDataThunk } from './features/dogThunk';
+import { AppDispatch, RootState } from './redux/store';
+import { getRandomDogImgThunk, postDogDataThunk } from  './redux/features/dogThunk';
 import Snackbar from 'react-native-snackbar';
-import { clearAll } from './features/dogSlice';
 
 interface FormData {
   petName: string;
