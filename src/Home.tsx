@@ -13,6 +13,7 @@ import {
   Modal,
   SafeAreaView,
   Platform,
+  PermissionsAndroid,
 } from 'react-native';
 import { launchImageLibrary, launchCamera, CameraOptions, ImageLibraryOptions } from 'react-native-image-picker';
 import { Picker } from '@react-native-picker/picker';
@@ -22,7 +23,7 @@ import { AppConstants } from './utils/constants';
 import { DogReqData } from './models/dogModel';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from './redux/store';
-import { getRandomDogImgThunk, postDogDataThunk } from  './redux/features/dogThunk';
+import { getRandomDogImgThunk, postDogDataThunk } from './redux/features/dogThunk';
 import Snackbar from 'react-native-snackbar';
 
 interface FormData {
@@ -64,6 +65,30 @@ const Home = () => {
     'Other',
   ];
 
+  const requestCameraPermission = async () => {
+    if (Platform.OS === 'android') {
+      try {
+        const granted = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.CAMERA,
+          {
+            title: 'Camera Permission',
+            message: 'App needs camera access to take pictures.',
+            buttonNeutral: 'Ask Me Later',
+            buttonNegative: 'Cancel',
+            buttonPositive: 'OK',
+          },
+        );
+        return granted === PermissionsAndroid.RESULTS.GRANTED;
+      } catch (err) {
+        console.warn(err);
+        return false;
+      }
+    } else {
+      // iOS permissions are handled via Info.plist automatically or on first use
+      return true;
+    }
+  }
+
   const showImagePicker = () => {
     Alert.alert(
       'Select Image',
@@ -77,23 +102,27 @@ const Home = () => {
     );
   };
 
-  const openCamera = () => {
+  const openCamera = async () => {
     const options: CameraOptions = {
       mediaType: 'photo',
       includeBase64: false,
       maxHeight: 2000,
       maxWidth: 2000,
     };
-
-    launchCamera(options, response => {
-      if (response.didCancel || response.errorMessage) {
-        return;
-      }
-      if (response.assets && response.assets[0]?.uri) {
-        const source = { uri: response.assets[0]?.uri };
-        setFormData({ ...formData, selectedImage: source });
-      }
-    });
+    const hasPermission = await requestCameraPermission();
+    if (hasPermission) {
+      launchCamera(options, response => {
+        if (response.didCancel || response.errorMessage) {
+          return;
+        }
+        if (response.assets && response.assets[0]?.uri) {
+          const source = { uri: response.assets[0]?.uri };
+          setFormData({ ...formData, selectedImage: source });
+        }
+      });
+    } else {
+      Alert.alert('Camera permission denied');
+    }
   };
 
   const openGallery = () => {
@@ -214,7 +243,7 @@ const Home = () => {
       )}
       <ScrollView>
         <View style={styles.header}>
-          <Icons name='dog' iconStyle='solid' size={20} color={AppTheme.white1}/>
+          <Icons name='dog' iconStyle='solid' size={20} color={AppTheme.white1} />
           <Text style={styles.title}>Find your perfect pet match!</Text>
         </View>
 
@@ -445,7 +474,7 @@ const styles = StyleSheet.create({
     width: 300,
     height: '60%',
     backgroundColor: AppTheme.white1,
-    padding: 30,
+    paddingVertical: 30,
     borderRadius: 15,
     alignItems: 'center',
     marginHorizontal: 30,
