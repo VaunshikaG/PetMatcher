@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
-import { getRandomDogImgApi, postDogDataApi } from "../service/service";
-import { DogReqData, ImgResponseData } from "../models/dogModel";
+import { DogReqData, ImgResponseData } from "../../models/dogModel";
+import { postDogDataApi, getRandomDogImgApi } from "../../service/service";
 
 export const postDogDataThunk = createAsyncThunk(
     'api/postDogDataThunk',

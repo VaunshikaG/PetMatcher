@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { DogReqData } from "../models/dogModel";
 import { getRandomDogImgThunk, postDogDataThunk } from "./dogThunk";
 
 interface DogState {
